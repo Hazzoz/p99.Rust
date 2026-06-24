@@ -1,0 +1,67 @@
+# rustfmt.toml for p99 (p99.Rust)
+#
+# Based on rustfmt.toml circa cargo-fmt 1.4.37 era.
+# edition/style_edition updated for Rust 2021.
+# Inline comments mark values that differ from the 2021 style edition
+# default.
+
+edition = "2021"
+style_edition = "2021"
+
+binop_separator = "Front"
+blank_lines_lower_bound = 0
+blank_lines_upper_bound = 3 # default: 1
+brace_style = "SameLineWhere"
+color = "Auto"
+combine_control_expr = false # default: true
+comment_width = 100 # default: 80
+condense_wildcard_suffixes = false
+control_brace_style = "AlwaysSameLine"
+disable_all_formatting = false
+empty_item_single_line = false # default: true
+enum_discrim_align_threshold = 0
+error_on_line_overflow = false
+error_on_unformatted = false
+fn_params_layout = "Vertical" # default: "Tall"
+fn_single_line = false
+force_explicit_abi = true
+force_multiline_blocks = true # default: false
+format_macro_bodies = true
+format_macro_matchers = true # default: false
+format_strings = false
+group_imports = "Preserve"
+hard_tabs = false
+ignore = []
+imports_granularity = "Crate" # default: "Preserve"
+imports_indent = "Block"
+imports_layout = "Vertical" # default: "Mixed"
+indent_style = "Block"
+inline_attribute_width = 0
+match_arm_blocks = true
+match_arm_leading_pipes = "Preserve" # default: "Never"
+match_block_trailing_comma = true # default: false
+max_width = 120 # default: 100
+merge_derives = false # default: true
+newline_style = "Auto"
+normalize_comments = false
+normalize_doc_attributes = true # default: false
+overflow_delimited_expr = false
+remove_nested_parens = true
+reorder_impl_items = true # default: false
+reorder_imports = true
+reorder_modules = true
+skip_children = false
+space_after_colon = true
+space_before_colon = true # default: false
+spaces_around_ranges = false
+struct_field_align_threshold = 40 # default: 0
+struct_lit_single_line = false # default: true
+tab_spaces = 4
+trailing_comma = "Vertical"
+trailing_semicolon = true
+type_punctuation_density = "Wide"
+use_field_init_shorthand = true # default: false
+use_small_heuristics = "Default"
+use_try_shorthand = true # default: false
+where_single_line = false
+wrap_comments = false

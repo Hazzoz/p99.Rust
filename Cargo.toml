@@ -1,0 +1,54 @@
+# ##########################################################
+# Package
+
+[package]
+
+authors = [
+	"Matt Wilson <matthew@synesis.com.au>",
+]
+categories = [
+	"development-tools::profiling",
+	"algorithms",
+]
+description = "Low-cost generation of performance percentiles (p50, p90, p99, etc.)"
+edition = "2021"
+homepage = "https://github.com/synesissoftware/p99.Rust"
+keywords = [
+	"percentiles",
+	"metrics",
+	"latency",
+	"performance",
+]
+license = "BSD-3-Clause"
+name = "p99"
+readme = "README.md"
+repository = "https://github.com/synesissoftware/p99.Rust"
+version = "0.0.0"
+
+
+# ##########################################################
+# Targets
+
+[lib]
+name = "p99"
+path = "src/lib.rs"
+
+
+# ##########################################################
+# Features
+
+[features]
+
+default = []
+
+
+# ##########################################################
+# Dependencies
+
+[dependencies]
+
+
+[dev-dependencies]
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
