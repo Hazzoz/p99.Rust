@@ -264,7 +264,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p50(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(50, 100);
+
+        let target_rank = (self.event_count as u128 * 1) / 2;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -277,7 +279,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p75(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(75, 100);
+
+        let target_rank = (self.event_count as u128 * 3) / 4;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -290,7 +294,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p90(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(90, 100);
+
+        let target_rank = (self.event_count as u128 * 90) / 100;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -303,7 +309,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p95(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(95, 100);
+
+        let target_rank = (self.event_count as u128 * 95) / 100;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -316,7 +324,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(99, 100);
+
+        let target_rank = (self.event_count as u128 * 99) / 100;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -329,7 +339,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99_5(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(995, 1_000);
+
+        let target_rank = (self.event_count as u128 * 995) / 1_000;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -342,7 +354,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99_9(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(999, 1_000);
+
+        let target_rank = (self.event_count as u128 * 999) / 1_000;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -355,7 +369,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99_99(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(9_999, 10_000);
+
+        let target_rank = (self.event_count as u128 * 9_999) / 10_000;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -368,7 +384,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99_999(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(99_999, 100_000);
+
+        let target_rank = (self.event_count as u128 * 99_999) / 100_000;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -381,7 +399,9 @@ impl Histogram {
     /// events; otherwise, returns `None`.
     #[inline(always)]
     pub fn value_at_p99_999_9(&self) -> Option<u64> {
-        let r = self.value_at_percentile_integer_impl(999_999, 1_000_000);
+
+        let target_rank = (self.event_count as u128 * 999_999) / 1_000_000;
+        let r = self.value_at_target_rank_impl(target_rank as u64);
 
         r
     }
@@ -495,17 +515,14 @@ impl Histogram {
         }
     }
 
-    fn value_at_percentile_integer_impl(
+    fn value_at_target_rank_impl(
         &self,
-        numerator: u64,
-        denominator: u64,
+        target_rank: u64,
     ) -> Option<u64> {
         if self.event_count == 0 {
             return None;
         }
 
-        let target_rank = (self.event_count as u128 * numerator as u128) / denominator as u128;
-        let target_rank = target_rank as u64;
         let mut accumulated = 0u64;
 
         // Iterate forwards because spatial clustering of latency events means
