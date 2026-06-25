@@ -9,5 +9,5 @@
 ## TODOs
 
 - [ ] `Debug` form;
-- [ ] binary scaling;
+- [x] ~~~binary scaling~~~;
 

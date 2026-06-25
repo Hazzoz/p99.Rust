@@ -95,7 +95,9 @@ No public enumerations are defined at this time.
 
 ### Features
 
-No public crate-specific features are defined at this time.
+The following crate features are available:
+
+* **`binary-scaling`**: Enables $2^{32}$ fixed-point binary scaling for percentile calculations. This replaces standard decimal division with bitwise shifts and multiplications, yielding a significant performance boost (~1.5x to 2x speedup) for percentile queries.
 
 
 ### Functions
