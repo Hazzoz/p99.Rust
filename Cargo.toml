@@ -4,6 +4,7 @@
 [package]
 
 authors = [
+	"Harry Wilson <hwils2019@gmail.com>",
 	"Matt Wilson <matthew@synesis.com.au>",
 ]
 categories = [
